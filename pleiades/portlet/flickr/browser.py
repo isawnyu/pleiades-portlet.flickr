@@ -61,7 +61,7 @@ class RelatedFlickrJson(BrowserView):
                 photo = photos["photo"][0]
                 img = "http://farm%(farm)s.staticflickr.com/%(server)s/%(id)s_%(secret)s_m.jpg" % photo
                 page = "http://flickr.com/photos/%(owner)s/%(id)s/in/pool-1876758@N22" % photo
-                title = photo["title"]
+                title = photo["title"] + " by " + photo["ownername"]
                 data["portrait"] = dict(title=title, img=img, page=page)
         self.request.response.setStatus(200)
         self.request.response.setHeader('Content-Type', 'application/json')
