@@ -8,7 +8,7 @@
     </dt>
 
     <dd class="portletItem odd">
-      <a id="flickr-portrait-link" href="" style="display:none"><img width="170" id="flickr-portrait" src="" title=""/></a>
+      <a id="flickr-portrait-link" href="" style="display:none"><img width="180" id="flickr-portrait" src="" title=""/></a>
       <p id="flickr-portrait-loading">Loading...</p>
       <p id="flickr-portrait-tip" style="display:none">This place has no portrait photo. One from the list of related photos could be suggested for the <a href="http://flickr.com/groups/1876758@N22/">Pleiades Places" group on Flickr</a>.</p>
     </dd>
