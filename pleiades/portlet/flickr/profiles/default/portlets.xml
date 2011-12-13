@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<portlets>
+
+ <!-- Portlet type registrations -->
+
+ <portlet
+   addview="pleiades.portlet.flickr.FlickrPortlet"
+   title="Related Flickr Content"
+   description="Synopsize related Flickr content"
+   />
+
+</portlets>
