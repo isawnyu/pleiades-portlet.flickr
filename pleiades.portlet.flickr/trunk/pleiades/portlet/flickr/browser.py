@@ -44,7 +44,7 @@ class RelatedFlickrJson(BrowserView):
             method="flickr.groups.pools.getPhotos",
             api_key=FLICKR_API_KEY,
             group_id="1876758@N22",
-            tags="pleiades:place=%s" % self.context.getId(),
+            tags="pleiades:depicts=%s" % self.context.getId(),
             format="json",
             nojsoncallback=1 )
         resp, content = h.request(FLICKR_API_ENDPOINT + "?" + urlencode(q), "GET")
