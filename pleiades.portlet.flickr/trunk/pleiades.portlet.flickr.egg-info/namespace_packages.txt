@@ -1,2 +1,0 @@
-pleiades
-pleiades.portlet
