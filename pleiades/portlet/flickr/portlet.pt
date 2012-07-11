@@ -7,16 +7,13 @@
         <span class="portletTopRight"></span>
     </dt>
 
-    <dd class="portletItem odd">
+    <div>
       <a id="flickr-portrait-link" href="" style="display:none"><img width="180" id="flickr-portrait" src="" title=""/></a>
-      <p id="flickr-portrait-attribution" style="display:none"></p>
+      <p><span id="flickr-portrait-attribution" style="display:none"></span> from the  <a href="http://www.flickr.com/groups/pleiades-places/pool/">Pleiades Places pool on Flickr</a></p>
       <p id="flickr-portrait-loading">Loading...</p>
-      <p id="flickr-portrait-tip" style="display:none">This place has no portrait photo. One from the list of related photos could be suggested for the <a href="http://flickr.com/groups/1876758@N22/">Pleiades Places" group on Flickr</a>.</p>
-    </dd>
-
-    <dd class="portletFooter">
-        <a id="flickr-photos-link" href="#"><span id="flickr-photos-count">0</span> related photos...</a>
-    </dd>
+      <p id="flickr-portrait-tip" style="display:none">This place has no portrait photo. One from the list of related photos could be suggested for the <a href="http://flickr.com/groups/1876758@N22/">Pleiades Places group on Flickr</a>.</p>
+      <p><a id="flickr-photos-link" href="#"><span id="flickr-photos-count">0</span> other related photos...</a></p>
+    </div>
 
 <script type="text/javascript">
 <!--
