@@ -34,7 +34,7 @@
          />
 
   <browser:view
-    for="Products.PleiadesEntity.content.interfaces.IPlace"
+    for="*"
     name="flickr-tagged"
     class=".browser.RelatedFlickrJson"
     permission="zope2.View"

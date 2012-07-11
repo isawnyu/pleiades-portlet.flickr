@@ -1,13 +1,17 @@
 import logging
+from random import choice
 from urllib import urlencode
 
 import httplib2
 import simplejson
 
+from Acquisition import aq_inner, aq_parent
 from plone.memoize.instance import memoize
 from Products.CMFCore.utils import getToolByName
 from zope.interface import implements, Interface, Attribute
 from zope.publisher.browser import BrowserPage, BrowserView
+
+from Products.PleiadesEntity.content.interfaces import ILocation, IName, IPlace
 
 log = logging.getLogger("pleiades.portlet.flickr")
 
@@ -39,9 +43,15 @@ class RelatedFlickrJson(BrowserView):
 
     def __call__(self, **kw):
         data = {}
+        context = self.context
         
-        pid = self.context.getId() # local id like "149492"
-
+        if IPlace.providedBy(context):
+            pid = context.getId() # local id like "149492"
+        elif ILocation.providedBy(context) or IName.providedBy(context):
+            pid = aq_parent(aq_inner(context)).getId()
+        else:
+            pid = "*"
+        
         # Count of related photos
 
         tag = "pleiades:*=" + pid
@@ -50,7 +60,7 @@ class RelatedFlickrJson(BrowserView):
         q = dict(
             method="flickr.photos.search",
             api_key=FLICKR_API_KEY,
-            machine_tags="pleiades:*=%s" % self.context.getId(),
+            machine_tags="pleiades:*=%s" % pid,
             format="json",
             nojsoncallback=1 )
         
@@ -66,18 +76,18 @@ class RelatedFlickrJson(BrowserView):
         
         # Get portrait photo from group pool
 
-        tag = "pleiades:depicts=" + pid
-
         h = httplib2.Http()
         q = dict(
             method="flickr.groups.pools.getPhotos",
             api_key=FLICKR_API_KEY,
             group_id=PLEIADES_PLACES_ID,
-            tags=tag,
             extras="views",
             format="json",
             nojsoncallback=1 )
         
+        if pid != "*":
+            q['tags'] = "pleiades:depicts=" + pid
+
         resp, content = h.request(FLICKR_API_ENDPOINT + "?" + urlencode(q), "GET")
         
         if resp['status'] == '200':
@@ -91,7 +101,10 @@ class RelatedFlickrJson(BrowserView):
                 # Sort found photos by number of views, descending
                 most_viewed = sorted(
                     photos['photo'], key=lambda p: p['views'], reverse=True )
-                photo = most_viewed[0]
+                if pid == "*":
+                    photo = choice(most_viewed)
+                else:
+                    photo = most_viewed[0]
 
                 title = photo['title'] + " by " + photo['ownername']
                 data['portrait'] = dict(
