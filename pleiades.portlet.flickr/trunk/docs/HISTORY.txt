@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.5 (2012-12-18)
+----------------
+- Add machine tag examples.
+
 0.4.2 (2012-07-25)
 ------------------
 - Change portlet header to "Photos."
