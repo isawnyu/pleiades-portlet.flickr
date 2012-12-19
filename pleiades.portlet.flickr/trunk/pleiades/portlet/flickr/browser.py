@@ -106,7 +106,8 @@ class RelatedFlickrJson(BrowserView):
                 else:
                     photo = most_viewed[0]
 
-                title = photo['title'] + " by " + photo['ownername']
+                title = "%s by %s." % (
+                    photo['title'].rstrip(" ."), photo['ownername'] )
                 data['portrait'] = dict(
                     title=title, img=IMG_TMPL % photo, page=PAGE_TMPL % photo )
         
