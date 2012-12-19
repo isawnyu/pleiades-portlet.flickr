@@ -1,8 +1,9 @@
 <dl class="portlet portletExamplePortlet"
-    i18n:domain="pleiades.portlet.flickr">
+    i18n:domain="pleiades.portlet.flickr"
+    tal:define="placeId view/placeId" >
 
   <style type="text/css">
-    .machine-tag-tiny { font-size: smaller; border: none; background-color: #cde; padding: 0.3em; }
+    .machine-tag-tiny { font-size: smaller; background-color: rgb(247, 247, 247); border: 1px solid rgb(215, 215, 215); padding: 0px 0.2em; }
   </style>
 
     <dt class="portletHeader">
@@ -17,10 +18,12 @@
       <p id="flickr-portrait-loading">Loading...</p>
       <p id="flickr-portrait-tip" style="display:none">This place has no portrait photo. One from the list of related photos could be suggested for the <a href="http://flickr.com/groups/1876758@N22/">Pleiades Places group on Flickr</a>.</p>
       <p id="flickr-photos-link"><a id="flickr-photos-link" href="#"><span id="flickr-photos-count">0</span> other related photos...</a></p>
-      <p>Use this tag in Flickr to mark <a tal:attributes="href string:http://flickr.com/photos/tags/pleiades:depicts=${view/context/getId}" href="">depictions of this place's site(s)</a>:
-      <pre class="machine-tag-tiny" tal:content="string:pleiades:depicts=${view/context/getId}">pleiades:depicts=*</pre></p>
-      <p>or this one to mark <a tal:attributes="href string:http://flickr.com/photos/tags/pleiades:findspot=${view/context/getId}" href="">objects found here</a>:
-      <pre class="machine-tag-tiny" tal:content="string:pleiades:findspot=${view/context/getId}">pleiades:findspot=*</pre></p>
+      <div tal:condition="placeId">
+      <p>Use this tag in Flickr to mark <a tal:attributes="href string:http://flickr.com/photos/tags/pleiades:depicts=$placeId" href="">depictions of this place's site(s)</a>:
+      <pre class="machine-tag-tiny" tal:content="string:pleiades:depicts=$placeId">pleiades:depicts=*</pre></p>
+      <p>or this one to mark <a tal:attributes="href string:http://flickr.com/photos/tags/pleiades:findspot=$placeId" href="">objects found here</a>:
+      <pre class="machine-tag-tiny" tal:content="string:pleiades:findspot=$placeId">pleiades:findspot=*</pre></p>
+      </div>
     </div>
 
 <script type="text/javascript">

@@ -1,3 +1,5 @@
+
+from Acquisition import aq_inner, aq_parent
 from zope.interface import implements
 
 from plone.portlets.interfaces import IPortletDataProvider
@@ -9,6 +11,8 @@ from plone.app.portlets.portlets import base
 from zope.formlib import form
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from Products.PleiadesEntity.content.interfaces import ILocation, IName, IPlace
 
 # TODO: If you require i18n translation for any of your schema fields below,
 # uncomment the following to import your package MessageFactory
@@ -31,7 +35,6 @@ class IFlickrPortlet(IPortletDataProvider):
     # some_field = schema.TextLine(title=_(u"Some field"),
     #                              description=_(u"A field to use"),
     #                              required=True)
-
 
 class Assignment(base.Assignment):
     """Portlet assignment.
@@ -71,6 +74,14 @@ class Renderer(base.Renderer):
 
     render = ViewPageTemplateFile('portlet.pt')
 
+    def placeId(self):
+        ctx = self.context
+        if IPlace.providedBy(ctx):
+            return ctx.getId()
+        elif ILocation.providedBy(ctx) or IName.providedBy(ctx):
+            return aq_parent(aq_inner(ctx)).getId()
+        else:
+            return None
 
 class AddForm(base.AddForm):
     """Portlet add form.
