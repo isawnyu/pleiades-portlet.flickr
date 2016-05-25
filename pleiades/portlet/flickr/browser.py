@@ -15,12 +15,12 @@ from Products.PleiadesEntity.content.interfaces import ILocation, IName, IPlace
 
 log = logging.getLogger("pleiades.portlet.flickr")
 
-FLICKR_API_ENDPOINT = "http://api.flickr.com/services/rest/"
+FLICKR_API_ENDPOINT = "https://api.flickr.com/services/rest/"
 FLICKR_API_KEY = "b5899a9f7069f933b46b32b949ab4afd"
-FLICKR_TAGS_BASE = "http://www.flickr.com/photos/tags/"
+FLICKR_TAGS_BASE = "https://www.flickr.com/photos/tags/"
 PLEIADES_PLACES_ID = "1876758@N22"
-IMG_TMPL = "http://farm%(farm)s.staticflickr.com/%(server)s/%(id)s_%(secret)s_m.jpg"
-PAGE_TMPL = "http://flickr.com/photos/%(owner)s/%(id)s/in/pool-1876758@N22"
+IMG_TMPL = "https://farm%(farm)s.staticflickr.com/%(server)s/%(id)s_%(secret)s_m.jpg"
+PAGE_TMPL = "https://flickr.com/photos/%(owner)s/%(id)s/in/pool-1876758@N22"
 
 
 class RelatedFlickrJson(BrowserView):
@@ -111,8 +111,6 @@ class RelatedFlickrJson(BrowserView):
                 data['portrait'] = dict(
                     title=title, img=IMG_TMPL % photo, page=PAGE_TMPL % photo )
         
-        self.request.response.setStatus(200)
+        self.request.response.setStatus(resp['status'])
         self.request.response.setHeader('Content-Type', 'application/json')
         return simplejson.dumps(data)
-
-

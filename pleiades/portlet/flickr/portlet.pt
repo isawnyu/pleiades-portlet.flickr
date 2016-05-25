@@ -30,8 +30,9 @@
 jQuery(function($) {
   
     $.ajax({
-      "url": document.baseURI + "/@@flickr-tagged",
-      "success": function (data) {
+      url: document.baseURI + "/@@flickr-tagged",
+      dataType: "json",
+      success: function (data) {
         $("#flickr-photos-count").html(data['related']['total']);
         $("#flickr-photos-link a").attr("href", data['related']['url']);
         if (data['portrait'] == null) {
@@ -48,7 +49,7 @@ jQuery(function($) {
           $("#flickr-portrait-attribution").show();
         }
       },
-      "error": function (req, status, err) {
+      error: function (req, status, err) {
         $("#flickr-portrait-loading").hide();
         $("#flickr-portrait-attribution").hide();
         $("#flickr-photos-link").hide();
