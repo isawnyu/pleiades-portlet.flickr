@@ -26,6 +26,7 @@ setup(name='pleiades.portlet.flickr',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'requests',
       ],
       entry_points="""
       # -*- Entry points: -*-
