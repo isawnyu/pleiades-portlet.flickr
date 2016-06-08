@@ -61,7 +61,8 @@ class RelatedFlickrJson(BrowserView):
 
         start = time()
         try:
-            resp = requests.get(FLICKR_API_ENDPOINT, params=q, timeout=(2, 5))
+            resp = requests.get(FLICKR_API_ENDPOINT, params=q,
+                                timeout=(3.05, 5))
         except requests.exceptions.RequestException:
             log.exception('Error making Flickr request for {}'.format(pid))
             raise FlickrResponseError(500)
@@ -92,7 +93,8 @@ class RelatedFlickrJson(BrowserView):
 
         start = time()
         try:
-            resp = requests.get(FLICKR_API_ENDPOINT, params=q, timeout=(2, 5))
+            resp = requests.get(FLICKR_API_ENDPOINT, params=q,
+                                timeout=(3.05, 5))
         except requests.exceptions.RequestException:
             log.exception('Error making Flickr pool request for {}'.format(
                 pid))
