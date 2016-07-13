@@ -28,9 +28,9 @@
 
 <script type="text/javascript">
 jQuery(function($) {
-  
+    var base_uri = document.baseURI.replace(/\/$/, "");
     $.ajax({
-      url: document.baseURI + "/@@flickr-tagged",
+      url: base_uri + "/@@flickr-tagged",
       dataType: "json",
       success: function (data) {
         $("#flickr-photos-count").html(data['related']['total']);
