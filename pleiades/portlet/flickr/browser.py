@@ -108,8 +108,8 @@ class RelatedFlickrJson(BrowserView):
                 raise FlickrResponseError(500)
 
             log.info(
-                "Flickr pool request for pid {} took {} seconds".format(
-                    pid, time() - start
+                "Flickr pool request for pid {} using tag {} took {} seconds".format(
+                    pid, mtag, time() - start
                 )
             )
 
@@ -118,8 +118,8 @@ class RelatedFlickrJson(BrowserView):
                     return resp.json()
             else:
                 log.warn(
-                    "Bad Flickr pool data for pid {}, response code {}".format(
-                        pid, resp.status_code
+                    "Bad Flickr pool data for pid {} using tag {}, response code {}".format(
+                        pid, mtag, resp.status_code
                     )
                 )
         if resp.status_code == 200:
