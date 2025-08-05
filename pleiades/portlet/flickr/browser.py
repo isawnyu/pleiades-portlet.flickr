@@ -123,8 +123,6 @@ class RelatedFlickrJson(BrowserView):
                         pid, mtag, resp.status_code
                     )
                 )
-        if resp.status_code == 200:
-            return resp.json()
         raise FlickrResponseError(resp.status_code)
 
     def __call__(self, **kw):
