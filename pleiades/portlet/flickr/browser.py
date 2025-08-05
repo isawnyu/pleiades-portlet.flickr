@@ -114,7 +114,8 @@ class RelatedFlickrJson(BrowserView):
             )
 
             if resp.status_code == 200:
-                if len(resp.json()["photos"]["photo"]) > 0:
+                photos = resp.json().get("photos", {}).get("photo", [])
+                if photos:
                     return resp.json()
             else:
                 log.warn(
